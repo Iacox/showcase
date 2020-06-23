@@ -1,25 +1,25 @@
 <template>
-    <form class="filter-form" action="#" @submit.prevent="$root.$children[0].$refs.cata.filterItems(filters.searchLine)">
+    <form class="filter-form" method="GET">
         <div>
-            <select id="subj" name="subj" @change="$root.$children[0].$refs.cata.filterItems(getTarget($event), 'filteredItems')">
+            <select id="subject" name="subject" @change="submitForm()">
                 <option value="">Все предметы</option>
-                <option v-for="subject of subjects" :key="subject" :value="subject">{{subject}}</option>
+                <option v-for="subject of subjects" :key="subject" :value="subject" v-bind:selected="filters.subject == subject">{{subject}}</option>
             </select>
         </div>
         <div>
-            <select id="genre" name="genre" @change="$root.$children[0].$refs.cata.filterItems(getTarget($event), 'filteredItems')">
+            <select id="genre" name="genre" @change="submitForm()">
                 <option value="">Все жанры</option>
-                <option v-for="genre of genres" :key="genre" :value="genre">{{genre}}</option>
+                <option v-for="genre of genres" :key="genre" :value="genre" v-bind:selected="filters.genre == genre">{{genre}}</option>
             </select>
         </div>
         <div>
-            <select id="grade" name="grade" @change="$root.$children[0].$refs.cata.filterItems(getTarget($event), 'filteredItems')">
+            <select id="grade" name="grade" @change="submitForm()">
                 <option value="">Все классы</option>
-                <option v-for="grade of grades" :key="grade" :value="grade">{{grade}}</option>
+                <option v-for="grade of grades" :key="grade" :value="grade" v-bind:selected="filters.grade == grade">{{grade}}</option>
             </select>
         </div>
         <div>
-            <input type="text" v-model.lazy="filters.searchLine" placeholder="Поиск" class="filter-field">
+            <input id="search" name="search" type="text" v-model="filters.search" placeholder="Поиск" class="filter-field">
             <button class="filter-btn" type="submit">
                 <i class="fas fa-search"></i>
             </button>
@@ -32,10 +32,10 @@ export default {
     data() {
         return {
             filters: {
-                searchLine: '',
-                genres: '',
-                grades: '',
-                subjects: ''
+                search: '',
+                genre: '',
+                grade: Number,
+                subject: ''
             },
             genres: [],
             grades: [],
@@ -45,6 +45,9 @@ export default {
     methods: {
         getTarget(e) {
             return e.target
+        },
+        submitForm() {
+            document.querySelector('.filter-form').submit()
         }
     }
 }
