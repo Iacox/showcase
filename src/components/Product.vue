@@ -6,7 +6,7 @@
         <div class="product-item_info">
             <p class="product-item__title">{{item.subject}}</p>
             <p class="product-item__grade">{{trueGrade(item.grade)}} класс</p>
-            <p class="product-item__genre">{{item.genre}}</p>    
+            <p class="product-item__genre">{{item.genre}}</p>
             <p class="product-item__meta"><a :href="item.shopUrl">Подробнее</a></p>
             <p class="product-item__controls">
                 <a href="#" class="product-item_buy-btn" v-if="$root.$children[0].currency == 'rub'">{{item.price}} рублей</a>
